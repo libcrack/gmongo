@@ -5,7 +5,7 @@ from . logger import Logger
 logger = Logger.logger
 
 
-class Mongo():
+class Mongo(object):
     _instance = None
 
     def __new__(cls, *args, **kwargs):
@@ -15,7 +15,7 @@ class Mongo():
         return cls._instance
 
     def __init__(self):
-        self.connection = pymongo.Connection()
+        self.connection = pymongo.MongoClient()
 
     def _get_database(self, database):
         return getattr(self.connection, database)
