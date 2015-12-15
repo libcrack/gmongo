@@ -41,6 +41,7 @@ class Console(InteractiveConsole):
             self.enter(
                 ''.join(f.readlines()))
 
+
 def main(self):
     cli = Console()
     return cli.interact()
