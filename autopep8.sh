@@ -2,7 +2,7 @@
 set -e
 path="."
 test -z "$1" || path="$1"
-for file in ${path}/*.py; do
+for file in $(find ${path} -type f -nane "*.py"); do
     echo "(pep8) >> $file"
     autopep8 --in-place --aggressive --aggressive "${file}"
 done
