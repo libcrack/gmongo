@@ -11,3 +11,4 @@ lib
 venv
 dist
 build
+__pycache__
