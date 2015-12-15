@@ -1,0 +1,4 @@
+pymongo
+twisted
+requests
+python-daemon
