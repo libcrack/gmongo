@@ -1,20 +1,32 @@
+import gi
 import json
+import mongo
+import logging
+
+try:
+    gi.require_version("Gtk", "3.0")
+except Exception as e:
+    print("ERROR: GTK 3.0 required - {0}".format())
+    print("Exiting ...")
 
 from gi.repository import Gtk, GdkPixbuf
 
-from mongo import Mongo
-
+logname = "gmongo"
+logging.basicConfig(level=logging.DEBUG)
+logger = logging.getLogger(logname)
+logger.setLevel(logging.INFO)
 
 def get_icon(type):
-    #FIXME: Gtk.IconSize.MENU
+    # FIXME: Gtk.IconSize.MENU
     icons = {"db": "folder-new",
-             "doc": "document",
-             "col": "document"}
+            "doc": "document",
+            "col": "document"}
     img = Gtk.IconTheme.get_default().load_icon(icons[type], 32, 0)
     return img
 
 
 class MainWindow(Gtk.Window):
+
     def __init__(self):
         super(MainWindow, self).__init__()
         self.connect_signals()
@@ -40,14 +52,15 @@ class MainWindow(Gtk.Window):
         self.back.show()
         toolbar.insert(self.back, -1)
         toolbar.hide()
-        toolbar.set_property('no-show-all', True)
+        toolbar.set_property("no-show-all", True)
         return toolbar
 
     def connect_signals(self):
-        self.connect('delete-event', Gtk.main_quit)
+        self.connect("delete-event", Gtk.main_quit)
 
 
 class DocumentView(object):
+
     def __init__(self, window, database, collection, filter):
         self.buffer = Gtk.TextBuffer()
         text = Gtk.TextView()
@@ -61,7 +74,7 @@ class DocumentView(object):
         self.fill_document(database, collection, filter)
 
     def fill_document(self, database, collection, filter):
-        mongo = Mongo()
+        mongo = mongo.Mongo()
         text = self.parse(mongo.get_content(database, collection, filter))
         self.buffer.set_text(text)
 
@@ -70,6 +83,7 @@ class DocumentView(object):
 
 
 class DocumentsView(object):
+
     def __init__(self, window):
         self.store = Gtk.ListStore(GdkPixbuf.Pixbuf, str)
         self.list = self.get_list()
@@ -78,7 +92,7 @@ class DocumentsView(object):
         self.connect_signals()
 
     def connect_signals(self):
-        self.list.connect('item-activated', self.on_item_activated)
+        self.list.connect("item-activated", self.on_item_activated)
 
     def get_list(self):
         list = Gtk.IconView()
@@ -101,14 +115,15 @@ class DocumentsView(object):
     def fill_documents(self, database, collection):
         self.database = database
         self.collection = collection
-        mongo = Mongo()
+        mongo = mongo.Mongo()
         self.store.clear()
         for d in mongo.get_all_documents(database, collection):
             title = str(d.get(d.keys()[0]))
-            self.store.append([get_icon('doc'), title])
+            self.store.append([get_icon("doc"), title])
 
 
 class DatabasesView(object):
+
     def __init__(self, documents):
         self.store = Gtk.TreeStore(GdkPixbuf.Pixbuf, str, int, bool)
         self.tree = self.get_tree()
@@ -117,9 +132,9 @@ class DatabasesView(object):
         self.documents = documents
 
     def get_tree(self):
-        '''Create the two columns to show the dbs/collections and the counter.
-        '''
-        collections_column = Gtk.TreeViewColumn('Collections')
+        """Create the two columns to show the dbs/collections and the counter.
+        """
+        collections_column = Gtk.TreeViewColumn("Collections")
 
         cell_text = Gtk.CellRendererText()
         cell_img = Gtk.CellRendererPixbuf()
@@ -148,25 +163,23 @@ class DatabasesView(object):
         return self.store.append(parent, [image, name, count, is_db])
 
     def connect_signals(self):
-        self.tree.connect('row-activated', self.on_row_activated)
+        self.tree.connect("row-activated", self.on_row_activated)
 
     def on_row_activated(self, widget, path, view_column):
         model = widget.get_model()
         if not model[path][3]:
             self.documents.fill_documents(model[path].get_parent()[1],
                                           model[path][1])
-
     def fill_databases(self):
-        mongo = Mongo()
-        for database in mongo.get_all_databases():
+        m = mongo.Mongo()
+        for database in m.get_all_databases():
             row = self.add_row(None,
-                               get_icon('db'),
-                               database,
-                               mongo.get_count(database),
-                               True)
-            for document in mongo.get_all_collections(database):
-                self.add_row(row,
-                             get_icon('doc'),
-                             document,
-                             mongo.get_count(database, document),
+                    get_icon("db"), database,
+                    m.get_count(database), True)
+
+            for document in m.get_all_collections(database):
+                    self.add_row(row, get_icon("doc"),
+                            document, m.get_count(database, document),
                              False)
+
+# vim:ts=4 sts=4 tw=79 expandtab:
