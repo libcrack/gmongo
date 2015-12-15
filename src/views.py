@@ -18,9 +18,11 @@ logger.setLevel(logging.INFO)
 
 def get_icon(type):
     # FIXME: Gtk.IconSize.MENU
-    icons = {"db": "folder-new",
-            "doc": "document",
-            "col": "document"}
+    icons = {
+        "db": "folder-new",
+        "doc": "document",
+        "col": "document"
+        }
     img = Gtk.IconTheme.get_default().load_icon(icons[type], 32, 0)
     return img
 

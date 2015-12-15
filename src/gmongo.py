@@ -2,7 +2,7 @@ import gi
 import sys
 import json
 import mongo
-import logging
+import logger
 
 try:
     gi.require_version("Gtk", "3.0")
@@ -14,12 +14,14 @@ from views import MainWindow
 from gi.repository import Gtk
 from gi.repository import GdkPixbuf
 
-logname = 'gmongo'
-logging.basicConfig(level=logging.DEBUG)
-logger = logging.getLogger(logname)
-# logger.setLevel(logging.INFO)
+from . import console
+from . import command
+from . logger import Logger
 
-if __name__ == '__main__':
+logger = Logger.logger
+
+if __name__ == "__main__":
+    logger.debug("Starting GTK Window")
     window = MainWindow()
     window.dbs.fill_databases()
     window.show_all()
