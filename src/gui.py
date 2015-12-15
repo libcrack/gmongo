@@ -1,25 +1,40 @@
+# -*- coding: utf-8 -*-
+# devnull@libcrack.so
+# jue jun 25 20:05:47 CEST 2015
+
 import gi
 import sys
 import json
 
 try:
     gi.require_version("Gtk", "3.0")
-except Exception as e:
-    raise Exception("Gtk 3.0: {0}".format())
+    from gi.repository import Gtk
+except ImportWarning as w:
+    print("Error Gtk 3.0: {0}".format(w))
 
 try:
     gi.require_version("GdkPixbuf", "2.0")
-except Exception as e:
-    raise Exception("GtkPixBuf 2.0: {0}".format())
-
-
-from gi.repository import GdkPixbuf
-from gi.repository import Gtk
+    from gi.repository import GdkPixbuf
+except ImportWarning as w:
+    print("Error GtkPixBuf 2.0: {0}".format(w))
 
 from . import db
 from . logger import Logger
 
 logger = Logger.logger
+Logger.set_verbose("debug")
+
+
+def main():
+    logger.debug("Starting GTK GUI")
+    logger.debug("MainWindow()")
+    window = MainWindow()
+    logger.debug("window.dbs.fill_databases.fill_databases()")
+    window.dbs.fill_databases()
+    logger.debug("window.show_all()")
+    window.show_all()
+    logger.debug("Gtk.main()")
+    Gtk.main()
 
 
 def get_icon(type):
@@ -28,17 +43,9 @@ def get_icon(type):
         "db": "folder-new",
         "doc": "document",
         "col": "document"
-        }
+    }
     img = Gtk.IconTheme.get_default().load_icon(icons[type], 32, 0)
     return img
-
-
-def main():
-    logger.debug("Starting GTK Window")
-    window = MainWindow()
-    window.dbs.fill_databases()
-    window.show_all()
-    Gtk.main()
 
 
 class MainWindow(Gtk.Window):
@@ -78,15 +85,19 @@ class MainWindow(Gtk.Window):
 class DocumentView(object):
 
     def __init__(self, window, database, collection, filter):
+        logger.debug("DocumentView.__init__")
         self.buffer = Gtk.TextBuffer()
         text = Gtk.TextView()
         text.set_buffer(self.buffer)
+        logger.debug("text.showall()")
         text.show_all()
         # Replace the IconView with the TextView
         window.vbox.get_children()[1].hide()
         window.vbox.pack_end(text, True, True, 0)
         # Show the toolbar to go back
+        logger.debug("window.toolbar.show()")
         window.toolbar.show()
+        logger.debug("self.fill_document()")
         self.fill_document(database, collection, filter)
 
     def fill_document(self, database, collection, filter):
@@ -95,12 +106,14 @@ class DocumentView(object):
         self.buffer.set_text(text)
 
     def parse(self, content):
+        logger.debug("dumping json content: %s".format(content))
         return json.dumps(content, indent=2)
 
 
 class DocumentsView(object):
 
     def __init__(self, window):
+        logger.debug("DocumentsView.__init__")
         self.store = Gtk.ListStore(GdkPixbuf.Pixbuf, str)
         self.list = self.get_list()
         self.scroll = self.get_scroll(self.list)
@@ -129,9 +142,12 @@ class DocumentsView(object):
                      self.list.get_model()[item][1])
 
     def fill_documents(self, database, collection):
+        logger.debug("fill_documents()")
         self.database = database
         self.collection = collection
         mongo = db.Mongo()
+        logger.debug("db.Mongo()")
+        self.database = database
         self.store.clear()
         for d in mongo.get_all_documents(database, collection):
             title = str(d.get(d.keys()[0]))
@@ -191,11 +207,11 @@ class DatabasesView(object):
         m = db.Mongo()
         for database in m.get_all_databases():
             row = self.add_row(None,
-                    get_icon("db"), database,
-                    m.get_count(database), True)
+                               get_icon("db"), database,
+                               m.get_count(database), True)
 
             for document in m.get_all_collections(database):
-                    self.add_row(row, get_icon("doc"),
-                                    document, m.get_count(database, document),False)
+                self.add_row(row, get_icon("doc"),
+                             document, m.get_count(database, document), False)
 
 # vim:ts=4 sts=4 tw=79 expandtab:

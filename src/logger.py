@@ -7,21 +7,17 @@ import logging
 import os
 
 # GLOBAL VARS
-logger_name = 'gmongo'
-
-# XXX logging level
-# avaible syslog loglevels => debug, info, warning, error, critical
-# default_log_level = 'debug'
-default_log_level = 'info'
-
+logname = 'gmongo'
 
 class Logger:
 
-    logger = logging.getLogger(logger_name)
+    logger = logging.getLogger(logname)
     logger.setLevel(logging.INFO)
 
-    DEFAULT_FORMAT = '%(asctime)s %(module)s [%(levelname)s]: %(message)s'
-    SYSLOG_FORMAT = logger_name + \
+    # '%(module)s %(funcName)s %(lineno)d %(pathname)s'
+    # DEFAULT_FORMAT = '%(asctime)s %(module)s [%(levelname)s]: %(message)s'
+    DEFAULT_FORMAT = '%(asctime)s [%(levelname)s] %(module)s.%(funcName)s : %(message)s'
+    SYSLOG_FORMAT = logname + \
         ': %(asctime)s %(module)s [%(levelname)s]: %(message)s'
     __formatter = logging.Formatter(DEFAULT_FORMAT)
     __streamhandler = None
@@ -176,16 +172,18 @@ class Logger:
         logger.error("un mensaje de error")
         logger.critical("un mensaje critico")
 
-# =======================================================================================
-# XXX Set up logfiles XXX
-# =======================================================================================
+# loglevels = [ debug, info, warning, error, critical ]
+default_level = 'info'
 
-# log_dir = './'
-# logfile_path = '%s/%s.log' % (log_dir,logger_name)
-# errfile_path = '%s/%s.log' % (log_dir,logger_name)
-# Logger.add_file_handler(logfile_path)
+# DEFAULT LOG FILES
+logdir = '.'
+logfile_path = '%s/%s.log' % (logdir, logname)
+errfile_path = '%s/%s.log' % (logdir, logname)
+
+# default log file creating
+Logger.add_file_handler(logfile_path)
 # Logger.add_error_file_handler(errfile_path)
 # Logger.remove_console_handler()
-# Logger.set_verbose(default_log_level)
+Logger.set_verbose(default_level)
 
 # vim:ts=4 sts=4 tw=79 expandtab:

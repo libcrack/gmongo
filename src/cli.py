@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# borja@libcrack.so
+# devnull@libcrack.so
 # jue jun 25 20:05:47 CEST 2015
 
 import os
@@ -40,3 +40,7 @@ class Console(InteractiveConsole):
         ) as f:
             self.enter(
                 ''.join(f.readlines()))
+
+def main(self):
+    cli = Console()
+    return cli.interact()

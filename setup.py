@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
-# Author: borja@libcrack.so
+# Author: devnull@libcrack.so
 # Date: Wed Jan 28 16:35:57 CET 2015
 
 import os
@@ -15,35 +15,36 @@ def read(relpath):
     this file.
     """
     cwd = os.path.dirname(__file__)
-    abspath = os.path.join(cwd,os.path.normpath(relpath))
+    abspath = os.path.join(cwd, os.path.normpath(relpath))
     with open(abspath) as f:
         return "".join(f.readlines())
 
 NAME = "gmongo"
 VERSION = re.search("__version__ = \"(\S+)\"",
-                   read("src/__init__.py")).group(1)
+                    read("src/__init__.py")).group(1)
 DESCRIPTION = "gtk mongo module."
 KEYWORDS = "mongo gtk"
 AUTHOR = "libcrack"
 AUTHOR_EMAIL = "devnull@libcrack.so"
 URL = "https://www.github.com/libcrack/gmongo"
 LICENSE = read("LICENSE")
-# PACKAGES = find_packages("src", exclude=["tests", "tests.*"])
+# PACKAGES = find_packages(exclude=["tests", "tests.*"])
 PACKAGE_DIR = {NAME: "./src"}
 PACKAGES = [NAME]
-PACKAGE_DATA = {NAME: [],}
+PACKAGE_DATA = {NAME: [], }
 # PACKAGES = ["gui", "cli"]
 # PACKAGE_DATA = {NAME: ["data/*"],}
 # PACKAGE_SCRIPTS = {NAME: ["bin/*"],}
 INSTALL_REQUIRES = [
-  x.replace("-", "_") for x in
+    x.replace("-", "_") for x in
     read("requirements.txt").split("\n") if x != ""
-  ]
+]
 #TEST_SUITE = "tests"
 #TESTS_REQUIRE = ["behave", "mock", "pyparsing", "pytest"]
 LONG_DESC = read("README.md") + "\n\n" + read("CHANGES")
 PLATFORMS = ["Linux"]
-PROVIDES = [NAME]
+# PROVIDES = [NAME, "gmongo.gui, gmongo.cli"]
+PROVIDES = [NAME] # , "gmongo.gui, gmongo.cli"]
 CLASSIFIERS = [
     "Development Status :: 3 - Beta",
     "Environment :: Console",
@@ -82,8 +83,7 @@ PARAMS = {
 
 ENTRY_POINTS = {
     "console_scripts": [
-        "gmongo-cli = gmongo.cli.Console:test_interact",
-        "gmongo-cmd = gmongo.cli.Console:interact"
+        "gmongo-cli = gmongo.cli.main",
     ],
     "gui_scripts": [
         "gmongo-gtk = gmongo.gui:main",
