@@ -3,10 +3,10 @@
 # Author: borja@libcrack.so
 # Date: Wed Jan 28 16:35:57 CET 2015
 
-import re
 import os
+import re
 
-from setuptools import find_packages, setup
+from setuptools import setup
 
 
 def read(relpath):
@@ -28,11 +28,13 @@ AUTHOR = "libcrack"
 AUTHOR_EMAIL = "devnull@libcrack.so"
 URL = "https://www.github.com/libcrack/gmongo"
 LICENSE = read("LICENSE")
-#PACKAGES = find_packages(exclude=["tests", "tests.*"])
+# PACKAGES = find_packages("src", exclude=["tests", "tests.*"])
+PACKAGE_DIR = {NAME: "./src"}
 PACKAGES = [NAME]
-PACKAGE_DATA = {NAME: ["data/*"],}
-#PACKAGE_SCRIPTS = {NAME: ["bin/*"],}
-PACKAGE_DIR = {NAME: "src"}
+PACKAGE_DATA = {NAME: [],}
+# PACKAGES = ["gui", "cli"]
+# PACKAGE_DATA = {NAME: ["data/*"],}
+# PACKAGE_SCRIPTS = {NAME: ["bin/*"],}
 INSTALL_REQUIRES = [
   x.replace("-", "_") for x in
     read("requirements.txt").split("\n") if x != ""
@@ -46,7 +48,7 @@ CLASSIFIERS = [
     "Development Status :: 3 - Beta",
     "Environment :: Console",
     "Intended Audience :: Developers",
-    "License :: Other/Propietary License",
+    "License :: GPL",
     "Operating System :: OS Independent",
     "Operating System :: POSIX :: Linux",
     "Natural Language :: English",
@@ -78,6 +80,16 @@ PARAMS = {
     "classifiers": CLASSIFIERS,
 }
 
-setup(**PARAMS)
+ENTRY_POINTS = {
+    "console_scripts": [
+        "gmongo-cli = gmongo.cli.Console:test_interact",
+        "gmongo-cmd = gmongo.cli.Console:interact"
+    ],
+    "gui_scripts": [
+        "gmongo-gtk = gmongo.gui:main",
+    ]
+}
+
+setup(entry_points=ENTRY_POINTS, **PARAMS)
 
 # vim:ts=4 sts=4 tw=79 expandtab:
