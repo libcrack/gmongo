@@ -6,6 +6,10 @@ from code import InteractiveConsole
 from imp import new_module
 import os
 
+from . logger import Logger
+
+logger = Logger.logger
+
 
 class Console(InteractiveConsole):
 

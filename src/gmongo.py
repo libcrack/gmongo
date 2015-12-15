@@ -4,6 +4,10 @@ import json
 import mongo
 import logger
 
+from . logger import Logger
+
+logger = Logger.logger
+
 try:
     gi.require_version("Gtk", "3.0")
 except Exception as e:

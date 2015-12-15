@@ -1,7 +1,10 @@
 import gi
 import json
 import mongo
-import logging
+
+from . logger import Logger
+
+logger = Logger.logger
 
 try:
     gi.require_version("Gtk", "3.0")
@@ -11,10 +14,6 @@ except Exception as e:
 
 from gi.repository import Gtk, GdkPixbuf
 
-logname = "gmongo"
-logging.basicConfig(level=logging.DEBUG)
-logger = logging.getLogger(logname)
-logger.setLevel(logging.INFO)
 
 def get_icon(type):
     # FIXME: Gtk.IconSize.MENU

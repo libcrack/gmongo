@@ -1,5 +1,9 @@
 import pymongo
 
+from . logger import Logger
+
+logger = Logger.logger
+
 
 class Mongo():
     _instance = None
