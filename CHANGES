@@ -1,0 +1,16 @@
+1450197405 - Tue, 15 Dec 2015 17:36:45 +0100 - devnull@libcrack.so - Updated changelog CHANGES
+1450197387 - Tue, 15 Dec 2015 17:36:27 +0100 - devnull@libcrack.so - Added gitignore
+1450197374 - Tue, 15 Dec 2015 17:36:14 +0100 - devnull@libcrack.so - Included __version__ declaration in __init__.py
+1450197260 - Tue, 15 Dec 2015 17:34:20 +0100 - devnull@libcrack.so - Added virtualenv helper bash script virtualenv.sh
+1450197231 - Tue, 15 Dec 2015 17:33:51 +0100 - devnull@libcrack.so - Added PEP8 script autopep8.sh
+1450197201 - Tue, 15 Dec 2015 17:33:21 +0100 - devnull@libcrack.so - Added setup tools python.py
+1450141545 - Tue, 15 Dec 2015 02:05:45 +0100 - devnull@libcrack.so - PEP8 gmongo.py
+1450141538 - Tue, 15 Dec 2015 02:05:38 +0100 - devnull@libcrack.so - PEP8 mongo.py
+1450141509 - Tue, 15 Dec 2015 02:05:09 +0100 - devnull@libcrack.so - PEP8 views.py
+1450141480 - Tue, 15 Dec 2015 02:04:40 +0100 - devnull@libcrack.so - Added gitignore
+1323570176 - Sun, 11 Dec 2011 03:22:56 +0100 - agonzalezro@gmail.com - OO doc
+1323565682 - Sun, 11 Dec 2011 02:08:02 +0100 - agonzalezro@gmail.com - screenshots changed
+1323565217 - Sun, 11 Dec 2011 02:00:17 +0100 - agonzalezro@gmail.com - solved problems with screenshot links
+1323565173 - Sun, 11 Dec 2011 01:59:33 +0100 - agonzalezro@gmail.com - added README link
+1323565128 - Sun, 11 Dec 2011 01:58:48 +0100 - agonzalezro@gmail.com - first commit to github
+1323302218 - Thu, 8 Dec 2011 00:56:58 +0100 - agonzalezro@gmail.com - first commit

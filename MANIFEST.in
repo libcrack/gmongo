@@ -1,0 +1,5 @@
+include README.md
+include CHANGES
+include LICENSE
+include data/logging.json
+recursive-include src *.py
