@@ -1,4 +1,7 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# devnull@libcrack.so
+# jue jun 25 20:05:47 CEST 2015
 
 import argparse
 import gmongo
@@ -15,5 +18,6 @@ if __name__ == '__main__':
                         required=True, type=str, help='configuration file')
     args = parser.parse_args()
 
-    app = gmongo.gui(config_path=args.config)
-    app.main()
+    app = gmongo.gui
+    app.main()   
+
