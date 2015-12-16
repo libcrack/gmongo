@@ -1,3 +1,23 @@
+1450238260 - Wed, 16 Dec 2015 04:57:40 +0100 - libcrack@users.noreply.github.com - Merge pull request #1 from libcrack/libcrack
+1450237872 - Wed, 16 Dec 2015 04:51:12 +0100 - devnull@libcrack.so - Added requeriments.txt
+1450218224 - Tue, 15 Dec 2015 23:23:44 +0100 - devnull@libcrack.so - Updated PEP8
+1450214571 - Tue, 15 Dec 2015 22:22:51 +0100 - devnull@libcrack.so - Added template MANIFEST.in
+1450214401 - Tue, 15 Dec 2015 22:20:01 +0100 - devnull@libcrack.so - Modification of setuptool script
+1450209692 - Tue, 15 Dec 2015 21:01:32 +0100 - devnull@libcrack.so - Code refactorisation & JSON logging configuration
+1450204578 - Tue, 15 Dec 2015 19:36:18 +0100 - devnull@libcrack.so - Merged views.py into gui.py
+1450204523 - Tue, 15 Dec 2015 19:35:23 +0100 - devnull@libcrack.so - Fixed pymongo references
+1450204496 - Tue, 15 Dec 2015 19:34:56 +0100 - devnull@libcrack.so - Added setuptools entrypoints "gmongo-gtk" and "gmongo-cli"
+1450204443 - Tue, 15 Dec 2015 19:34:03 +0100 - devnull@libcrack.so - Updated requeriments.txt
+1450204427 - Tue, 15 Dec 2015 19:33:47 +0100 - devnull@libcrack.so - Fix minor typo in autopep8.sh
+1450198167 - Tue, 15 Dec 2015 17:49:27 +0100 - devnull@libcrack.so - Modified virtualenv.sh to use the default python binary
+1450197978 - Tue, 15 Dec 2015 17:46:18 +0100 - devnull@libcrack.so - Implemented use of logger class in gmongo
+1450197957 - Tue, 15 Dec 2015 17:45:57 +0100 - devnull@libcrack.so - Improved autopep8.sh script
+1450197700 - Tue, 15 Dec 2015 17:41:40 +0100 - devnull@libcrack.so - Added package launcher "gmongo" to bin/
+1450197671 - Tue, 15 Dec 2015 17:41:11 +0100 - devnull@libcrack.so - Update gitignoew to exclude the directory  .idea
+1450197606 - Tue, 15 Dec 2015 17:40:06 +0100 - devnull@libcrack.so - Added python interactive console in src/console.py
+1450197564 - Tue, 15 Dec 2015 17:39:24 +0100 - devnull@libcrack.so - Added custom logging module "logger.py"
+1450197490 - Tue, 15 Dec 2015 17:38:10 +0100 - devnull@libcrack.so - Added author,date,email and version to __init__
+1450197447 - Tue, 15 Dec 2015 17:37:27 +0100 - devnull@libcrack.so - Updated changelog CHANGES
 1450197405 - Tue, 15 Dec 2015 17:36:45 +0100 - devnull@libcrack.so - Updated changelog CHANGES
 1450197387 - Tue, 15 Dec 2015 17:36:27 +0100 - devnull@libcrack.so - Added gitignore
 1450197374 - Tue, 15 Dec 2015 17:36:14 +0100 - devnull@libcrack.so - Included __version__ declaration in __init__.py
